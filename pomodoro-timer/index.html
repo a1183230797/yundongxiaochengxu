@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'" />
+    <title>番茄钟</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <h1>番茄钟</h1>
+        <label class="pin-toggle" title="窗口置顶">
+          <input type="checkbox" id="alwaysOnTop" />
+          <span>置顶</span>
+        </label>
+      </header>
+
+      <nav class="modes" role="tablist">
+        <button type="button" class="mode-btn is-active" data-mode="focus" role="tab" aria-selected="true">专注</button>
+        <button type="button" class="mode-btn" data-mode="short" role="tab" aria-selected="false">短休</button>
+        <button type="button" class="mode-btn" data-mode="long" role="tab" aria-selected="false">长休</button>
+      </nav>
+
+      <div class="timer-ring-wrap" aria-live="polite">
+        <svg class="timer-ring" viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="ring-bg" cx="60" cy="60" r="54" />
+          <circle class="ring-progress" cx="60" cy="60" r="54" id="ringProgress" />
+        </svg>
+        <div class="timer-center">
+          <div class="time-display" id="timeDisplay">25:00</div>
+          <div class="phase-label" id="phaseLabel">准备开始</div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button type="button" class="btn btn-primary" id="btnPrimary">开始</button>
+        <button type="button" class="btn btn-ghost" id="btnReset">重置</button>
+      </div>
+
+      <section class="stats">
+        <div class="stat">
+          <span class="stat-value" id="completedCount">0</span>
+          <span class="stat-label">今日完成</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="cycleHint">每 4 次专注后长休</span>
+          <span class="stat-label">节奏</span>
+        </div>
+      </section>
+
+      <details class="settings">
+        <summary>时长设置（分钟）</summary>
+        <div class="settings-grid">
+          <label>专注 <input type="number" id="durFocus" min="1" max="120" value="25" /></label>
+          <label>短休 <input type="number" id="durShort" min="1" max="60" value="5" /></label>
+          <label>长休 <input type="number" id="durLong" min="1" max="60" value="15" /></label>
+        </div>
+        <p class="hint">修改后点「重置」应用当前模式时长。</p>
+      </details>
+
+      <p class="footer-hint">关闭窗口即退出应用。可勾选「置顶」边工作边看倒计时。</p>
+    </div>
+    <script src="renderer.js"></script>
+  </body>
+</html>
